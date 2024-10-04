@@ -18,7 +18,6 @@ test {
         enabled = true // Ensure JaCoCo is enabled for tests
     }
 }
-
 jacocoTestReport {
     dependsOn test // Ensure tests run before generating the report
 
@@ -27,20 +26,19 @@ jacocoTestReport {
         html.required.set(true)
     }
 
-    // Configure which class files to include/exclude
+    // Specify the correct source directory (src/main/java/com)
+    sourceDirectories.setFrom(files('src/main/java/com'))
+
+    // Configure the class directories, filtering out excluded files
     def excludes = [
         '**/generated/**', // Exclude generated code if necessary
         '**/SomeOtherExcludedPattern/**' // Add other patterns as needed
     ]
 
-    // Set the source directories for the report
-    sourceDirectories.setFrom(files('src/main/java/com'))
-
-    // Configure the class directories with exclusions
     classDirectories.setFrom(
         files('build/classes/java/main').collect {
             fileTree(dir: it, exclude: excludes)
-        })
+        }
     )
 
     // Set the execution data location
