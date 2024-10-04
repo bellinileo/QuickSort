@@ -13,7 +13,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport // Ensure the report is generated after tests
+    finalizedBy jacocoTestReport // Ensures the report runs after tests
+    jacoco {
+        enabled = true // Ensure JaCoCo is enabled for tests
+    }
 }
 
 jacoco {
