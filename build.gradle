@@ -34,11 +34,11 @@ jacocoTestReport {
     ]
 
     // Set the source directories for the report
-    sourceDirectories.setFrom(files('src/main/java'))
+    sourceDirectories.setFrom(files('src/main/java/com'))
 
     // Configure the class directories with exclusions
     classDirectories.setFrom(
-        files(classDirectories.files.collect {
+        files('build/classes/java/main').collect {
             fileTree(dir: it, exclude: excludes)
         })
     )
