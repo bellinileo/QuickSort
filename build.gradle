@@ -23,12 +23,14 @@ jacoco {
 }
 
 jacocoTestReport {
-    dependsOn test // Ensure tests run before reporting
+    dependsOn test
 
     reports {
-        xml.required = true
-        html.enabled = true
+        xml.required.set(true) // Use 'set' method for newer Gradle versions
+        html.required.set(true) // Replace 'enabled = true' with 'required.set(true)'
     }
+}
+
 
     // Customize coverage thresholds (optional)
     afterEvaluate {
