@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'jacoco' // Add JaCoCo plugin
+    id 'jacoco' // Apply the JaCoCo plugin
 }
 
 repositories {
@@ -13,45 +13,44 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
-    // Enable reporting after test execution
-    finalizedBy jacocoTestReport
+    finalizedBy jacocoTestReport // Ensure the report is generated after tests
 }
 
 jacoco {
-    toolVersion = "0.8.7" // Use the latest stable version
+    toolVersion = "0.8.12" // Use the latest stable JaCoCo version
 }
 
 jacocoTestReport {
-    dependsOn test
+    dependsOn test // Ensure tests run before generating the report
 
     reports {
-        xml.required.set(true) // Use 'set' method for newer Gradle versions
-        html.required.set(true) // Replace 'enabled = true' with 'required.set(true)'
+        xml.required.set(true)
+        html.required.set(true)
     }
-}
 
+    // Configure which class files to include/exclude
+    def excludes = [
+        '**/generated/**', // Exclude generated code if necessary
+        '**/SomeOtherExcludedPattern/**' // Add other patterns as needed
+    ]
 
-    // Customize coverage thresholds (optional)
-    afterEvaluate {
-        classDirectories.setFrom(
-            files(classDirectories.files.collect {
-                fileTree(dir: it, exclude: ['**/generated/**']) // Exclude generated code if needed
-            })
-        )
-    }
+    classDirectories.setFrom(
+        files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludes)
+        })
+    )
 }
 
 jacocoTestCoverageVerification {
+    dependsOn test
+
     violationRules {
         rule {
             limit {
-                // Set threshold for branch (decision) coverage
                 counter = 'BRANCH'
                 value = 'COVEREDRATIO'
-                minimum = 0.80 // Example: require 80% branch coverage
+                minimum = 0.80 // Set your desired branch coverage threshold
             }
         }
     }
 }
-
