@@ -19,10 +19,6 @@ test {
     }
 }
 
-jacoco {
-    toolVersion = "0.8.12" // Use the latest stable JaCoCo version
-}
-
 jacocoTestReport {
     dependsOn test // Ensure tests run before generating the report
 
@@ -37,11 +33,18 @@ jacocoTestReport {
         '**/SomeOtherExcludedPattern/**' // Add other patterns as needed
     ]
 
+    // Set the source directories for the report
+    sourceDirectories.setFrom(files('src/main/java/com'))
+
+    // Configure the class directories with exclusions
     classDirectories.setFrom(
         files(classDirectories.files.collect {
             fileTree(dir: it, exclude: excludes)
         })
     )
+
+    // Set the execution data location
+    executionData.setFrom(files('build/jacoco/test.exec'))
 }
 
 jacocoTestCoverageVerification {
