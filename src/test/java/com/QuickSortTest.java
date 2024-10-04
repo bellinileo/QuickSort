@@ -22,7 +22,7 @@ public class QuickSortTest {
      void testPosMixNeg() {
         int[] array = {4, -2, -7, 1, 9, -3};
         QuickSort.quickSort(array, 0, array.length - 1);
-        assertArrayEquals(new int[]{-7, -3, 1, 4, 7, 9}, array);
+        assertArrayEquals(new int[]{-7, -3, -2, 1, 4, 9}, array);
     }
 
     @Test
