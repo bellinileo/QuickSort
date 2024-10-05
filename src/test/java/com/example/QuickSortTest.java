@@ -1,7 +1,9 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class QuickSortTest {
 
@@ -35,7 +37,7 @@ public class QuickSortTest {
         int[] expectedArray = {-2000, -1820, -1500, -1234, -1212, -999, -890, -760, -654, -456, -450, -320, -182, 111, 220, 345, 567, 789, 900, 999, 1111, 1342, 1500, 1760, 2000};
         QuickSort.quickSort(array, 0, array.length - 1);
         assertArrayEquals(expectedArray, array);
-     }
+    }
 
     @Test
     public void testQuickRepeats() {
@@ -45,6 +47,40 @@ public class QuickSortTest {
         assertArrayEquals(expectedArray, array);
     }
     
- 
+    @Test
+    public void testQuickSortNull() {
+        int[] array = null;
+        assertThrows(IllegalArgumentException.class, () -> {
+            QuickSort.quickSort(array, 0, 0); // Should throw exception
+        });
+    }
+    
+    @Test
+    public void testQuickSortInvalidIndi() {
+        int[] array = {5, 3, 8};
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            QuickSort.quickSort(array, -1, array.length - 1); // Invalid low index
+        });
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            QuickSort.quickSort(array, 0, array.length); // Invalid high index
+        });
+    }
+    
+    @Test
+    public void testQuickSortSorted() {
+        int[] array = {1, 2, 3, 4, 5};
+        int[] expectedArray = {1, 2, 3, 4, 5};
+        QuickSort.quickSort(array, 0, array.length - 1);
+        assertArrayEquals(expectedArray, array);
+    }
+    
+    @Test
+    public void testQuickSortReverseSorted() {
+        int[] array = {5, 4, 3, 2, 1};
+        int[] expectedArray = {1, 2, 3, 4, 5};
+        QuickSort.quickSort(array, 0, array.length - 1);
+        assertArrayEquals(expectedArray, array);
+    }
 }
+
 
