@@ -38,11 +38,11 @@ public class QuickSortTest {
      }
     
     @Test
-    public void testQuickSortNonInt() {
-        String[] array = {one, two, three, four};
+        public void testQuickNonInt() {
+        String[] array = {"one", "two", "three", four};
         assertThrows(ClassCastException.class, () -> {
-        QuickSort.quickSort(array, 0, array.length - 1);        
-       }
+        QuickSort.quickSort(array, 0, array.length - 1); 
+        });
     }
 }
 
