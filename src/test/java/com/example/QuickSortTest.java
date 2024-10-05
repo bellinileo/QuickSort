@@ -35,15 +35,14 @@ public class QuickSortTest {
         int[] expectedArray = {-2000, -1820, -1500, -1234, -1212, -999, -890, -760, -654, -456, -450, -320, -182, 111, 220, 345, 567, 789, 900, 999, 1111, 1342, 1500, 1760, 2000};
         QuickSort.quickSort(array, 0, array.length - 1);
         assertArrayEquals(expectedArray, array);
-
+     }
+    
     @Test
     public void testQuickSortNonInt() {
         String[] array = {one, two, three, four};
         assertThrows(ClassCastException.class, () -> {
         QuickSort.quickSort(array, 0, array.length - 1);        
-}
-    
-        
-}
+       }
+    }
 }
 
