@@ -36,13 +36,15 @@ public class QuickSortTest {
         QuickSort.quickSort(array, 0, array.length - 1);
         assertArrayEquals(expectedArray, array);
      }
-    
+
     @Test
-        public void testQuickNonInt() {
-        Object[] array = {"one", "two", "three", "four"};
-        assertThrows(ClassCastException.class, () -> {
-        QuickSort.quickSort(array, 0, array.length - 1); 
-        });
+    public void testQuickRepeats() {
+        int[] array = {10, 10, 10, 10, -5, -5};
+        int[] expectedArray = {-5, -5, 10, 10, 10, 10};
+        QuickSort.quickSort(array, 0, array.length - 1);
+        assertArrayEquals(expectedArray, array);
     }
+    
+ 
 }
 
